@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>javascript-noise - demo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				margin-top: 40px;
+			}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div id="container">4D noise output from <pre>snoise(vec4.fromValues(0.1, 0.5, 0.1, 1.0))</pre><span id="value"></span></div>
+		<p>For more precision use Float64Array or Array instead of Float32Array in glMatrix</p>
+
+		<script src="../src/libs/gl-matrix-min.js"></script>
+		<script src="../src/gl-matrix-extended.js"></script>
+		<script src="../src/noise4D.js"></script>
+
+		<script>
+			var value = snoise(vec4.fromValues(0.1, 0.5, 0.1, 1.0));
+			document.getElementById("value").innerHTML = value;
+		</script>
+
+	</body>
+</html>
