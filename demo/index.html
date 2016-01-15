@@ -6,24 +6,32 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
 			body {
-				margin-top: 40px;
+				margin-top: 10px;
 			}
-
+			div {
+				margin-bottom: 20px;
+				background-color: #ddd;
+				padding: 10px;
+			}
 		</style>
 	</head>
 
 	<body>
-
-		<div id="container">4D noise output from <pre>snoise(vec4.fromValues(0.1, 0.5, 0.1, 1.0))</pre><span id="value"></span></div>
-		<p>For more precision use Float64Array or Array instead of Float32Array in glMatrix</p>
+		<h2>Demo</h2>
+		<div id="container">3D noise output from <pre>snoise(vec3.fromValues(0.1, 0.5, 0.1))</pre><span id="output_3d"></span></div>
+		<div id="container">4D noise output from <pre>snoise(vec4.fromValues(0.1, 0.5, 0.1, 1.0))</pre><span id="output_4d"></span></div>
+		<p>For more precision use Float64Array or Array instead of Float32Array in glMatrix.</p>
 
 		<script src="../src/libs/gl-matrix-min.js"></script>
 		<script src="../src/gl-matrix-extended.js"></script>
+		<script src="../src/noise3D.js"></script>
 		<script src="../src/noise4D.js"></script>
 
 		<script>
-			var value = snoise(vec4.fromValues(0.1, 0.5, 0.1, 1.0));
-			document.getElementById("value").innerHTML = value;
+			var output_3d = snoise_vec3(vec3.fromValues(0.1, 0.5, 0.1));
+			var output_4d = snoise_vec4(vec4.fromValues(0.1, 0.5, 0.1, 1.0));
+			document.getElementById("output_3d").innerHTML = output_3d;
+			document.getElementById("output_4d").innerHTML = output_4d;
 		</script>
 
 	</body>

@@ -1,4 +1,4 @@
-var C = vec4.fromValues(0.138196601125011,  // (5 - sqrt(5))/20  G4
+var C_vec4 = vec4.fromValues(0.138196601125011,  // (5 - sqrt(5))/20  G4
                         0.276393202250021,  // 2 * G4
                         0.414589803375032,  // 3 * G4
                        -0.447213595499958)  // -1 + 4 * G4
@@ -119,7 +119,7 @@ function grad4(j) {
     return p;
 }
 
-function snoise(v) {
+function snoise_vec4(v) {
     var i = vec4.dot(v, SimplexNoise_GV2);
     var temp = vec4.create();
 
@@ -127,7 +127,7 @@ function snoise(v) {
 
     var x0 = vec4.create();
     x0 = vec4.sub(x0, v, i);
-    x0 = vec4.addScalar(x0, x0, vec4.dot(i, vec4.fromValues(C[0], C[0], C[0], C[0])) );
+    x0 = vec4.addScalar(x0, x0, vec4.dot(i, vec4.fromValues(C_vec4[0], C_vec4[0], C_vec4[0], C_vec4[0])) );
 
     var isX = vec3.create();
     var isYZ = vec3.create();
@@ -166,10 +166,10 @@ function snoise(v) {
     var x3 = vec4.create();
     var x4 = vec4.create();
 
-    x1 = vec4.addScalar(x1, vec4.sub(x1, x0, i1), C[0] );
-    x2 = vec4.addScalar(x2, vec4.sub(x2, x0, i2), C[1] );
-    x3 = vec4.addScalar(x3, vec4.sub(x3, x0, i3), C[2] );
-    x4 = vec4.addScalar(x4, x0, C[3] );
+    x1 = vec4.addScalar(x1, vec4.sub(x1, x0, i1), C_vec4[0] );
+    x2 = vec4.addScalar(x2, vec4.sub(x2, x0, i2), C_vec4[1] );
+    x3 = vec4.addScalar(x3, vec4.sub(x3, x0, i3), C_vec4[2] );
+    x4 = vec4.addScalar(x4, x0, C_vec4[3] );
 
     // Permutations
     //i = mod289(i);
