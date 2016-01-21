@@ -31,66 +31,12 @@
 
   <body>
 
-      <canvas></canvas>
-      <a href="" id="drawBtn">Draw another frame</a>
-   
-
-    <script src="/src/libs/gl-matrix-min.js"></script>
-    <script src="/src/noise3D.js"></script>
-    <script>
-      var canvas = document.getElementsByTagName('canvas')[0];
-      var drawBtn = document.getElementById('drawBtn');
-      canvas.width = 1024;
-      canvas.height = 768;
-      var ctx = canvas.getContext('2d');
-      var image = ctx.createImageData(canvas.width, canvas.height);
-      var data = image.data;
-      var noisef = SimplexNoise.snoise_vec3;
-      var z = 0;
+    <h2>Hello!</h2>
     
-      drawBtn.onclick = function() {
-          drawFrame();
-          return false;
-      };
-
-      function drawFrame() {
-        var start = Date.now();
-        // Cache width and height values for the canvas.
-        var canvasWidth = canvas.width;
-        var canvasHeight = canvas.height;
-        var value = 0;
-        
-        for (var x = 0; x < canvasWidth; x++) {
-          for (var y = 0; y < canvasHeight; y++) {
-
-            value = Math.abs(noisef(x * 0.01, y * 0.01, z * 0.1)) * 256;
-
-            var cell = (x + y * canvasWidth) * 4;
-
-            data[cell] = data[cell + 1] = data[cell + 2] = value;        
-            data[cell + 3] = 255; // alpha.
-          }
-        }
-
-        var end = Date.now();
-
-        ctx.fillStyle = 'yellow';
-        ctx.putImageData(image, 0, 0);
-
-        ctx.font = '18px verdana'
-        ctx.textAlign = 'center';
-        ctx.fillText('Rendered in ' + (end - start) + ' ms', canvasWidth / 2, 40);
-
-        if(console) {
-          console.log('Rendered in ' + (end - start) + ' ms');
-        }
-
-        z++;
-       // requestAnimationFrame(drawFrame);
-      };
-
-      // Draw one frame
-      drawFrame();
-    </script>
+    <p>Check out the demos below</p>
+    <ul>
+      <li><a href="/javascript-noise/demo/index.html">Basic output from calling the 3D and 4D noise functions</a></li>
+      <li><a href="/javascript-noise/demo/index.html">Visual 3D demo - generates 3D simplex noise on a 1024x768 canvas</a></li>
+    </ul>
   </body>
 </html>
