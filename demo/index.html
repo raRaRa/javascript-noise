@@ -8,6 +8,9 @@
 			body {
 				margin-top: 10px;
 			}
+			ul {
+				list-style-type: none;
+			}
 			div {
 				margin-bottom: 20px;
 				background-color: #ddd;
@@ -17,19 +20,28 @@
 	</head>
 
 	<body>
-		<h2>Demo</h2>
-		<div id="container">3D noise output from <pre>snoise(vec3.fromValues(0.1, 0.5, 0.1))</pre><span id="output_3d"></span></div>
-		<div id="container">4D noise output from <pre>snoise(vec4.fromValues(0.1, 0.5, 0.1, 1.0))</pre><span id="output_4d"></span></div>
+		<h2>Simplex noise ported to JS demo</h2>
+		<div id="container">2D noise output from <pre>SimplexNoise2D.snoise_vec2(0.1, 0.5)</pre><span id="output_2d"></span></div>
+		<div id="container">3D noise output from <pre>SimplexNoise3D.snoise_vec3(0.1, 0.5, 0.1)</pre><span id="output_3d"></span></div>
+		<div id="container">4D noise output from <pre>snoise_vec4(vec4.fromValues(0.1, 0.5, 0.1, 1.0))</pre><span id="output_4d"></span></div>
 		<p>For more precision use Float64Array or Array instead of Float32Array in glMatrix.</p>
 
+		<h3>Other demos</h3>
+		<ul>
+			<li><a href="2d.html">Visual 2D demo</a></li>
+			<li><a href="3d.html">Visual 3D demo</a></li>
+		</ul>
 		<script src="../src/libs/gl-matrix-min.js"></script>
 		<script src="../src/gl-matrix-extended.js"></script>
+		<script src="../src/noise2D.js"></script>
 		<script src="../src/noise3D.js"></script>
 		<script src="../src/noise4D.js"></script>
 
 		<script>
-			var output_3d = SimplexNoise.snoise_vec3(0.1, 0.5, 0.1);
+			var output_2d = SimplexNoise2D.snoise_vec2(0.1, 0.5);
+			var output_3d = SimplexNoise3D.snoise_vec3(0.1, 0.5, 0.1);
 			var output_4d = snoise_vec4(vec4.fromValues(0.1, 0.5, 0.1, 1.0));
+			document.getElementById("output_2d").innerHTML = output_2d;
 			document.getElementById("output_3d").innerHTML = output_3d;
 			document.getElementById("output_4d").innerHTML = output_4d;
 		</script>

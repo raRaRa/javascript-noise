@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>javascript-noise - 3d demo</title>
+    <title>javascript-noise - 2d demo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
@@ -13,6 +13,7 @@
         background-color: #eee;
         text-align: center;
       }
+
       canvas {
         display: block;
         width: 1024px;
@@ -20,6 +21,7 @@
         margin: 10px auto;
         padding: 0;
       }
+
       a {
         padding: 4px 8px;
         text-decoration: none;
@@ -30,12 +32,12 @@
   </head>
 
   <body>
-    <h2>3D demo</h2>
+    <h2>2D demo</h2>
     <canvas></canvas>
-    <a href="" id="drawBtn">Increase the input z value</a>
+    <a href="" id="drawBtn">Increase the input x value</a>
 
     <script src="../src/libs/gl-matrix-min.js"></script>
-    <script src="../src/noise3D.js"></script>
+    <script src="../src/noise2D.js"></script>
     <script>
       var canvas = document.getElementsByTagName('canvas')[0];
       var drawBtn = document.getElementById('drawBtn');
@@ -44,8 +46,8 @@
       var ctx = canvas.getContext('2d');
       var image = ctx.createImageData(canvas.width, canvas.height);
       var data = image.data;
-      var noisef = SimplexNoise3D.snoise_vec3;
-      var z = 0;
+      var noisef = SimplexNoise2D.snoise_vec2;
+      var x = 0, y = 0, shiftX = 0;
     
       drawBtn.onclick = function() {
           drawFrame();
@@ -59,10 +61,10 @@
         var canvasHeight = canvas.height;
         var value = 0;
         
-        for (var x = 0; x < canvasWidth; x++) {
-          for (var y = 0; y < canvasHeight; y++) {
+        for (x = 0; x < canvasWidth; x++) {
+          for (y = 0; y < canvasHeight; y++) {
 
-            value = Math.abs(noisef(x * 0.01, y * 0.01, z * 0.05)) * 256;
+            value = Math.abs(noisef(x * 0.01 + shiftX, y * 0.01)) * 256;
 
             var cell = (x + y * canvasWidth) * 4;
 
@@ -84,7 +86,7 @@
           console.log('Rendered in ' + (end - start) + ' ms');
         }
 
-        z++;
+        shiftX += 0.1;
        // requestAnimationFrame(drawFrame);
       };
 
