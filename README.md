@@ -11,3 +11,5 @@ I've only optimized the 2D and 3D noise functions.
 ### Demo ###
 
 There are 3 demos available, one that shows the output from calling the 2D, 3D and 4D noise functions, and 2D and 3D noise demos that show something more visual.
+
+[Demo page](http://rarara.github.io/javascript-noise/)
