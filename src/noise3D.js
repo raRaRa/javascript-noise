@@ -109,7 +109,9 @@ var SimplexNoise3D = (function () {
         // First corner
         // GLSL code:
         // vec3 i = floor(v + dot(v, C.yyy) );
-        var temp_dot0 = inX * C_1 + inY * C_1 + inZ * C_1;
+        // vec3 i = floor(v + (v.x + v.y + v.z) * C_1)
+        //var temp_dot0 = inX * C_1 + inY * C_1 + inZ * C_1;
+        var temp_dot0 = (inX + inY + inZ) * C_1;
         i[0] = Math.floor(inX + temp_dot0);
         i[1] = Math.floor(inY + temp_dot0);
         i[2] = Math.floor(inZ + temp_dot0);
