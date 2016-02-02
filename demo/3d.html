@@ -31,21 +31,23 @@
 
   <body>
     <h2>3D demo</h2>
-    <canvas></canvas>
+    <canvas width="1024" height="768"></canvas>
     <a href="" id="drawBtn">Increase the input z value</a>
 
-    <script src="../src/libs/gl-matrix-min.js"></script>
     <script src="../src/noise3D.js"></script>
     <script>
-      var canvas = document.getElementsByTagName('canvas')[0];
-      var drawBtn = document.getElementById('drawBtn');
-      canvas.width = 1024;
-      canvas.height = 768;
-      var ctx = canvas.getContext('2d');
-      var image = ctx.createImageData(canvas.width, canvas.height);
-      var data = image.data;
-      var noisef = SimplexNoise3D.snoise_vec3;
-      var z = 0;
+      var canvas = document.getElementsByTagName('canvas')[0],
+          drawBtn = document.getElementById('drawBtn'),
+          ctx = canvas.getContext('2d'),
+          image = ctx.createImageData(canvas.width, canvas.height),
+          data = image.data,
+          simplex = new SimplexNoise3D(),
+          x = 0,
+          y = 0,
+          z = 0,
+          canvasWidth = canvas.width,
+          canvasHeight = canvas.height,
+          value = 0;
     
       drawBtn.onclick = function() {
           drawFrame();
@@ -54,15 +56,11 @@
 
       function drawFrame() {
         var start = Date.now();
-        // Cache width and height values for the canvas.
-        var canvasWidth = canvas.width;
-        var canvasHeight = canvas.height;
-        var value = 0;
         
         for (var x = 0; x < canvasWidth; x++) {
           for (var y = 0; y < canvasHeight; y++) {
 
-            value = Math.abs(noisef(x * 0.01, y * 0.01, z * 0.05)) * 256;
+            value = Math.abs(simplex.snoise(x * 0.01, y * 0.01, z * 0.05)) * 256;
 
             var cell = (x + y * canvasWidth) * 4;
 

@@ -38,7 +38,8 @@
 		<script src="../src/noise4D.js"></script>
 
 		<script>
-			var output_2d = SimplexNoise2D.snoise_vec2(0.1, 0.5);
+			var simplex2d = new SimplexNoise2D();
+			var output_2d = simplex2d.snoise(0.1, 0.5);
 			var output_3d = SimplexNoise3D.snoise_vec3(0.1, 0.5, 0.1);
 			var output_4d = snoise_vec4(vec4.fromValues(0.1, 0.5, 0.1, 1.0));
 			document.getElementById("output_2d").innerHTML = output_2d;
